@@ -30,7 +30,7 @@ node_modules
 .project
 
 # GFM Preview
-.README.html.md
+.README.md.html
 
 # Mac OS
 .DS_Store
