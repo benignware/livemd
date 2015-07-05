@@ -9,6 +9,7 @@ Supported languages:
 * HTML
 * CSS
 * Javascript
+* Coffeescript
 * SCSS
 * Less
 * Haml
