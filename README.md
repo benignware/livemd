@@ -14,6 +14,12 @@ Supported languages:
 * Less
 * Haml
 
+## Install
+
+```shell
+npm install livemd --save-dev
+```
+
 ## Usage
 
 ```js
