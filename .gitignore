@@ -34,3 +34,6 @@ node_modules
 
 # Mac OS
 .DS_Store
+
+# Temp
+tmp
