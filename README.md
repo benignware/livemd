@@ -20,6 +20,15 @@ Supported languages:
 npm install livemd --save-dev
 ```
 
+To use with preprocessor languages you need the appropriate modules to be installed.
+
+```shell
+npm install coffee-script
+npm install node-sass
+npm install less
+npm install hamljs
+```
+
 ## Usage
 
 ```js
