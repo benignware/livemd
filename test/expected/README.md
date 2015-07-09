@@ -1,8 +1,8 @@
-grunt-livemd
-============
+livemd
+======
 > Generate live-samples from markdown files
 
-[Demo](http://benignware.github.io/grunt-livemd)
+[Demo](http://benignware.github.io/livemd)
 
 <div class="highlight-example">
 <h4 id="click-me">Click to color me</h4>
@@ -15,12 +15,11 @@ grunt-livemd
 
 
 
-
-<style>h4 {
+<style>
+div.highlight-example h4 {
   color: purple;
 }
 </style>
-
 
 
 ```css
@@ -31,13 +30,12 @@ h4 {
 
 
 
-
-<script>var el = document.querySelector('#click-me');
+<script>
+try { var el = document.querySelector('#click-me');
 el.onclick = function() {
   this.style.color = 'blue'
-};
+};} catch (e) {}
 </script>
-
 
 
 ```js
@@ -63,7 +61,7 @@ el.onclick = function() {
 
 
 <script>
-(function() {
+try { (function() {
   var el;
 
   el = document.querySelector('#click-me-coffee');
@@ -73,6 +71,7 @@ el.onclick = function() {
   };
 
 }).call(this);
+} catch (e) {}
 </script>
 
 
@@ -98,11 +97,13 @@ el.onclick = () ->
 
 
 <style>
-h4#scss {
-  background: blue; }
+div.highlight-example h4#scss {
+  background: blue;
+}
 
-h4#scss {
-  color: #f938ab; }
+div.highlight-example h4#scss {
+  color: #f938ab;
+}
 </style>
 
 
@@ -130,10 +131,11 @@ h4#scss {
 
 
 <style>
-h4#less {
+div.highlight-example h4#less {
   background: blue;
 }
-h4#less {
+
+div.highlight-example h4#less {
   color: #f938ab;
 }
 </style>
