@@ -1,8 +1,8 @@
-grunt-livemd
-============
+livemd
+======
 > Generate live-samples from markdown files
 
-[Demo](http://benignware.github.io/grunt-livemd)
+[Demo](http://benignware.github.io/livemd)
 
 ```html
 <h4 id="click-me">Click to color me</h4>
