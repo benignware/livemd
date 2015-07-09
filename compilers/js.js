@@ -1,9 +1,10 @@
 var
   Q = require("q");
 module.exports = function compile(code, options) {
+  code = options.debug ? code : 'try { ' + code + '} catch (e) {}';
   var
     defer = Q.defer(),
-    result = "\n<script>" + code + "\n</script>\n";
+    result = "<script>\n" + code + "\n</script>";
   defer.resolve(result);
   return defer.promise;
 };
