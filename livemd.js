@@ -9,6 +9,7 @@ module.exports = function livemd(string, options, callback) {
   
   options = deepmerge({
     // Defaults
+    debug: false,
     wrap: '<div class="highlight-example"></div>',
     prefilter: null,
     paths: [],
