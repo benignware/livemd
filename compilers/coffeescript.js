@@ -1,11 +1,10 @@
 var
   Q = require("q"),
-  coffescript = require("coffee-script");
+  coffescript = require("coffee-script"),
+  js = require('./js');
 module.exports = function compile(code, options) {
   var
     defer = Q.defer(),
-    code = coffescript.compile(code),
-    result = "<script>\n" + code + "</script>";
-  defer.resolve(result);
-  return defer.promise;
+    code = coffescript.compile(code);
+  return js(code, options);
 };
