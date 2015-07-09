@@ -1,6 +1,6 @@
 {
   "name": "livemd",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generate live-samples from markdown files",
   "main": "livemd.js",
   "repository": {
