@@ -1,0 +1,21 @@
+@mixin bubble($background, $color, $size: 15px) {
+  
+  background: $background;
+  display: inline-block;
+  padding: $size;
+  position: relative;
+  margin-left: $size;
+  color: $color;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    left: -$size;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    border-top: ($size / 2) solid transparent;
+    border-right: $size solid $background;
+    border-bottom: ($size / 2) solid transparent;
+  }
+}
