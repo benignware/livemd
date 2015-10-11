@@ -42,8 +42,6 @@ module.exports = function livemd(string, options, callback) {
     return path.basename(file).replace(/(?:\.[\+\w]*)+/, "");
   });
   
-  console.log("compilers: ", compilers);
-  
   var
     defer = Q.defer(),
     compilers = fs.readdirSync(__dirname + '/compilers').map(function(file) {
