@@ -1,101 +1,64 @@
 var
-  path = require("path"),
-  fs = require("fs"),
+  path = require('path'),
+  fs = require('fs'),
   deepmerge = require("deepmerge"),
-  cheerio = require("cheerio"),
+  compile = require("./lib/compile"),
+  render = require("./lib/render"),
   Q = require("q");
-
-module.exports = function livemd(string, options, callback) {
+module.exports = function (string, options) {
   
-  options = deepmerge({
-    // Defaults
-    debug: false,
-    wrap: '<div class="highlight-example"></div>',
-    prefilter: null,
-    paths: [],
-    compiler: {
-      sass: {
-        includePaths: []
-      },
-      less: {
-        paths: []
+      var
+        defer = Q.defer(),
+        //data = grunt.file.read(src),
+        data = fs.readFileSync(src),
+        done = function(result) {
+          //grunt.file.write(dest, result);
+          defer.resolve(result);
+        };
+        options = deepmerge(options, {
+          paths: options.paths.slice().concat([path.dirname(src), path.dirname(dest)])
+        });
+        compile(data, options)
+          .done(function(result) {
+            if (dest.split(".").pop() === 'html' || options.output === 'html') {
+              render(result, deepmerge(options, {
+                title: typeof options.title === 'function' ? options.title(src) : options.title,
+              }))
+                .done(function(result) {
+                  done(result);
+                });
+            } else {
+              done(result);
+            }
+          });
+      return defer.promise;
+    },
+    options: (function() {
+      var
+        data = {};
+      try
+        data = require(process.cwd() + '/package.json';
+      } catch (e) {
+        return {};
       }
-    }
-  }, options);
-  
-  
-  if (fs.existsSync(string)) {
-    options = deepmerge(options, {
-      paths: options.paths.slice().concat([path.dirname(string)])
-    });
-    string = fs.readFileSync(string);
-  }
-  
-  options.compiler.sass.includePaths = options.paths.concat(options.compiler.sass.includePaths);
-  options.compiler.less.paths = options.paths.concat(options.compiler.less.paths);
-  
-  if (typeof options.prefilter === 'function') {
-    string = options.prefilter(string);
-  }
-  
-  var compilers = fs.readdirSync(__dirname + '/compilers').map(function(file) {
-    return path.basename(file).replace(/(?:\.\w*)+/, "");
-  });
-  
-  var
-    defer = Q.defer(),
-    compilers = fs.readdirSync(__dirname + '/compilers').map(function(file) {
-      return path.basename(file).replace(/(?:\.\w*)+/, "");
-    }),
-    pattern = new RegExp("\n```(" + compilers.join("|") + ")" + "\s*\n*\s*([^`]*)\s*```", "gi"), 
-    matches = [],
-    match,
-    result,
-    offset = 0,
-    index,
-    input = string,
-    lang,
-    code;
-  
-  while (match = pattern.exec(string)) {
-    matches.push(match);
-  }
-  
-  var blocks = matches.map(function(match) {
-    return {
-      match: match,
-      lang: match[1].trim(),
-      code: match[2].trim()
-    };
-  });
-  
-  if (blocks.length > 0) {
-    Q.all(blocks.map(function(block) {
-      var compile = require("./compilers/" + block.lang + ".js");
-      var promise = compile(block.code, options);
-      promise.done(function(result) {
-        block.result = result;
-      });
-      return promise;
-    })).done(function() {
-      result = "";
-      blocks.forEach(function(block) {
-        index = block.match.index;
-        input = block.match.input || "";
-        result+= input.substring(offset, index);
-        if (block.result) {
-          // Add live sample
-          result+= "\n" + block.result + "\n\n";
+    })(),
+    options = deepmerge({
+      // Default options
+      title: '',
+      layout: {
+        data: {
+          pkg: fs.existsSync(require(process.cwd() + '/package.json')
         }
-        result+= "\n```" + block.lang + "\n" + block.code + "\n```\n\n";
-        offset = index + block.match[0].length;
-      });
-      result+= "\n" + input.substring(offset);
-      // Resolve
-      defer.resolve(result);
-    });
-  } else {
-    defer.resolve(string);
-  }
-  return defer.promise;
+      },
+      paths: []
+    }),
+    done = this.async();
+  
+  Q.all(this.files.map(function(f) {
+    return compile(f.src, f.dest, options);
+  })).then(function() {
+    done();
+  });
+    
+  });
 };

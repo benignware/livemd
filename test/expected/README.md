@@ -188,5 +188,3 @@ h4#less {
 ```haml
 %h4#haml= "Haml Example"
 ```
-
-

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="http://cdn.rawgit.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css">
+    <link type="text/css" rel="stylesheet" href="http://cdn.rawgit.com/richleland/pygments-css/master/github.css">
+    <title><%= title || pkg.name %></title>
+    <meta charset="UTF-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+    
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+      }
+          
+      .highlight-example:after {
+        color: #959595;
+        content: "Example";
+        font-size: 12px;
+        font-weight: 700;
+        left: 15px;
+        letter-spacing: 1px;
+        position: absolute;
+        text-transform: uppercase;
+        top: 15px;
+      }
+      
+      .highlight-example {
+        border-color: #e5e5e5 #eee #eee;
+        border-style: solid;
+        border-width: 1px 0;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05) inset;
+        margin: 0 -15px 15px;
+        padding: 45px 15px 15px;
+        position: relative;
+      }
+      
+      .highlight-example {
+        background-color: #fff;
+        border-color: #ddd;
+        border-radius: 4px 4px 0 0;
+        border-width: 1px;
+        box-shadow: none;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .highlight-example + .highlight {
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-width: 1px;
+        margin: -16px 0 15px;
+        border-width: 1px;
+      }
+
+      .highlight {
+        background-color: #f7f7f9;
+        border: 1px solid #e1e1e8;
+        border-radius: 4px;
+        margin-bottom: 14px;
+        padding: 0;
+      }
+
+      .highlight pre {
+        background-color: transparent;
+        border: 0 none;
+        margin-bottom: 0;
+        margin-top: 0;
+        padding: 0;
+      }
+      
+      article.markdown-body {
+        max-width: 728px;
+        margin: 50px auto;
+      }
+      
+      body > footer {
+        border-top: 1px solid #eee;
+        color: #767676;
+        font-size: 12px;
+        line-height: 1.5;
+        margin-top: 40px;
+        padding-bottom: 40px;
+        padding-top: 40px;
+        position: relative;
+        max-width: 728px;
+        margin: 50px auto;
+      }
+      
+      body > footer > * {
+        float: left;
+        line-height: 16px;
+        font-size: 12px;
+      }
+      body > footer > *:last-child {
+        float: right;
+      }
+      
+      body > footer > nav ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      body > footer > nav ul li {
+        display: inline-block;
+      }
+      
+      body > footer > nav ul li + li {
+        margin-left: 10px;
+      }
+      
+      a {
+        color: #4078c0;
+        text-decoration: none;
+      }
+      
+      img[style*='fixed'] {
+        z-index: 10;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <% if (!_.isUndefined(pkg.repository) && _.contains(pkg.repository.url, 'github')) { %>
+    <a href="<%= pkg.repository.url.replace(/^git/, 'https').replace(/.git$/, '') %>">
+      <!-- github badge -->
+      <img style="position: fixed; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png">
+    </a>
+    <% } %>
+    <article class="markdown-body"><%= content %></article>
+    <footer>
+      <div class="disclaimer">
+        <% if (!_.isUndefined(pkg.author)) { %>
+           &copy; <%= new Date().getFullYear() %>
+          <% if (!_.isEmpty(pkg.author.email) || !_.isEmpty(pkg.author.url)) { %>
+            <a href="<% if (!_.isEmpty(pkg.author.email)) { %><%= pkg.author.url %><% } else { %>mailto:<%= pkg.author.email %><% } %>">
+          <% } %>
+            <%= pkg.author.name %>
+          <% if (!_.isEmpty(pkg.author.email)) { %>
+            </a>
+          <% } %>
+        <% } %>
+      </div>
+      <nav>
+        <ul>
+          <% if (!_.isEmpty(pkg.version)) { %>
+            <li>v<%= pkg.version %></li>
+          <% } %>
+          <% if (!_.isEmpty(pkg.version) && !_.isUndefined(pkg.repository) && _.contains(pkg.repository.url, 'github')) { %>
+            <li><a href="<%= pkg.repository.url.replace(/^git/, 'https').replace(/.git$/, '') %>/archive/v<%= pkg.version %>.zip">Download</a></li>
+          <% } %>
+          <% if (!_.isEmpty(pkg.bugs)) { %>
+            <li><a href="<%= pkg.bugs.url %>">Bugs</a></li>
+          <% } %>
+        </ul>
+      </nav>
+      
+    </footer>
+  </body>
+</html>

@@ -30,7 +30,22 @@ exports.livemd = {
     // setup here if necessary
     done();
   },
-  test: function(test) {
+  compile: function(test) {
+    test.expect(1);
+    
+    var promise = livemd('test/fixtures/README.md', {});
+    promise.done(function(result) {
+      mkdirp('tmp');
+      fs.writeFileSync('tmp/README.md', result);
+      var actual = fs.readFileSync('tmp/README.md').toString();
+      var expected = fs.readFileSync('test/expected/README.md').toString();
+      test.equal(actual, expected, 'should generate markdown with runtime samples.');
+      test.done();
+    });
+    
+  },
+  /*
+  export: function(test) {
     test.expect(1);
     
     var promise = livemd('test/fixtures/README.md', {});
@@ -44,5 +59,5 @@ exports.livemd = {
       test.done();
     });
     
-  }
+  }*/
 };
