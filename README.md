@@ -61,7 +61,7 @@ Specify a wrapper for the generated live-samples.
 
 ## Changelog
 
-* v0.0.4 - Fixed fail on combined lexers
+* v0.0.5 - Fixed fail on combined lexers
 * v0.0.3 - Wrap CSS
 * v0.0.2 - Added npm install info to README.md
 * v0.0.1 - Initial Release
