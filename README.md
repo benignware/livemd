@@ -61,7 +61,7 @@ Specify a wrapper for the generated live-samples.
 
 ## Demo Projects
 
-See these demo sites created with grunt-livemd
+See these demo sites created with [grunt-livemd](https://github.com/benignware/grunt-livemd)
 
 * [visualist](http://benignware.github.io/visualist/)
 * [jquery-findus](http://benignware.github.io/jquery-findus/)
