@@ -59,6 +59,17 @@ Default value: `'<div class="highlight-example"></div>'`
 Specify a wrapper for the generated live-samples.
 
 
+## Demo Projects
+
+See these demo sites created with grunt-livemd
+
+* [visualist](http://benignware.github.io/visualist/)
+* [jquery-findus](http://benignware.github.io/jquery-findus/)
+* [jquery-placepicker](http://benignware.github.io/jquery-placepicker/)
+* [jquery-vgrd](http://benignware.github.io/jquery-vgrd/)
+* [jquery-checkview](http://benignware.github.io/jquery-checkview/)
+* [jquery-countimator](http://benignware.github.io/jquery-countimator/)
+
 ## Changelog
 
 * v0.0.6 - Remove debug output ;-)
